@@ -1,6 +1,8 @@
 FROM ubuntu:20.04
-MAINTAINER Jan Grewe <jan@faked.org>
+MAINTAINER Vardan Aivazyan <aivazyan@gmail.com>
+# cloned from https://github.com/jangrewe/gitlab-ci-android for some modifications
 
+# Get version from https://developer.android.com/studio
 ENV VERSION_TOOLS "6858069"
 
 ENV ANDROID_SDK_ROOT "/sdk"
@@ -15,13 +17,14 @@ RUN apt-get -qq update \
       curl \
       git-core \
       html2text \
-      openjdk-11-jdk \
+      openjdk-8-jdk \
       libc6-i386 \
       lib32stdc++6 \
       lib32gcc1 \
       lib32ncurses6 \
       lib32z1 \
       unzip \
+      wget \
       locales \
  && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 RUN locale-gen en_US.UTF-8
