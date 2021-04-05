@@ -4,7 +4,7 @@ MAINTAINER Vardan Aivazyan <aivazyan@gmail.com>
 
 # Get version from https://developer.android.com/studio
 ENV VERSION_TOOLS "6858069"
-
+ENV ANDROID_COMPILE_SDK "30"
 ENV ANDROID_SDK_ROOT "/sdk"
 # Keep alias for compatibility
 ENV ANDROID_HOME "${ANDROID_SDK_ROOT}"
@@ -32,6 +32,9 @@ ENV LANG='en_US.UTF-8' LANGUAGE='en_US:en' LC_ALL='en_US.UTF-8'
 
 RUN rm -f /etc/ssl/certs/java/cacerts; \
     /var/lib/dpkg/info/ca-certificates-java.postinst configure
+
+RUN wget --quiet --output-document=android-wait-for-emulator https://raw.githubusercontent.com/travis-ci/travis-cookbooks/0f497eb71291b52a703143c5cd63a217c8766dc9/community-cookbooks/android-sdk/files/default/android-wait-for-emulator \
+ && chmod +x android-wait-for-emulator
 
 RUN curl -s https://dl.google.com/android/repository/commandlinetools-linux-${VERSION_TOOLS}_latest.zip > /cmdline-tools.zip \
  && mkdir -p ${ANDROID_SDK_ROOT}/cmdline-tools \
